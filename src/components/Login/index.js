@@ -1,12 +1,61 @@
 import './index.css'
+import Cookies from 'js-cookie'
 import {Component} from 'react'
 
 class Login extends Component {
+  state = {
+    username: '',
+    password: '',
+    errorMessage: '',
+  }
+
+  userAuthenticationFetchApi = async event => {
+    event.preventDefault()
+    const {username, password} = this.state
+    const userDetails = {
+      username,
+      password,
+    }
+    const url = 'https://apis.ccbp.in/login'
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(userDetails),
+    }
+
+    const response = await fetch(url, options)
+    const data = await response.json()
+    console.log(response)
+    console.log(data)
+    if (response.ok) {
+      const token = data.jwt_token
+      Cookies.set('jwt_token', token, {expires: 1})
+
+      const {history} = this.props
+      history.replace('/')
+    } else {
+      const errorMsg = data.error_msg
+      console.log(errorMsg)
+      this.setState({errorMessage: errorMsg})
+    }
+  }
+
+  onChangeUserName = event => {
+    this.setState({username: event.target.value})
+  }
+
+  onChangePassword = event => {
+    this.setState({password: event.target.value})
+  }
+
   render() {
+    const {username, password, errorMessage} = this.state
     return (
       <div className="login-bg">
         <div className="login-form-bg">
-          <form className="login-form">
+          <form
+            className="login-form"
+            onSubmit={this.userAuthenticationFetchApi}
+          >
             <div className="login-form-top">
               <img
                 src="https://res.cloudinary.com/dusiydn2q/image/upload/v1666697612/Tasty%20Kitchen/websiteLogo_cbloci.png"
@@ -19,15 +68,28 @@ class Login extends Component {
               USERNAME
             </label>
             <br />
-            <input className="login-form-input" id="username" type="text" />
+            <input
+              className="login-form-input"
+              id="username"
+              type="text"
+              value={username}
+              onChange={this.onChangeUserName}
+            />
             <br />
             <label className="login-form-label-name" htmlFor="username">
               PASSWORD
             </label>
             <br />
-            <input className="login-form-input" id="PASSWORD" type="text" />
+            <input
+              className="login-form-input"
+              id="PASSWORD"
+              type="text"
+              value={password}
+              onChange={this.onChangePassword}
+            />
             <br />
-            <button className="login-btn" type="button">
+            <p className="login-form-error-message">{errorMessage}</p>
+            <button type="submit" className="login-btn">
               Login
             </button>
           </form>
