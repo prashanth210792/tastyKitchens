@@ -1,6 +1,7 @@
 import './App.css'
-import {Route} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 import Login from './components/Login'
+import Home from './components/Home'
 
 // const sortByOptions = [
 //   {
@@ -15,6 +16,11 @@ import Login from './components/Login'
 //   },
 // ]
 
-const App = () => <Route path="/login" component={Login} />
+const App = () => (
+  <Switch>
+    <Route exact path="/" component={Home} />)
+    <Route exact path="/login" component={Login} />
+  </Switch>
+)
 
 export default App

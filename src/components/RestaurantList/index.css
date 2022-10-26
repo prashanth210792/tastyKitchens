@@ -1,0 +1,45 @@
+.restaurant-container {
+  margin-top: 40px;
+}
+.restaurant-heading {
+  color: #183b56;
+  font-family: DM Sans;
+  font-weight: 700;
+  font-size: 32px;
+}
+.restaurant-para {
+  color: #64748b;
+  font-family: DM Sans;
+  font-weight: 500;
+  font-size: 16px;
+}
+.restaurant-ul {
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.arrow {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #334155;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
+.pagination-para {
+  color: #334155;
+  font-family: Bree Serif;
+  font-weight: 400;
+  font-size: 20px;
+  width: 80px;
+  text-align: center;
+}
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
