@@ -1,0 +1,55 @@
+.restaurant-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+.restaurant-des-container {
+  width: 100%;
+  /* height: 300px; */
+  color: #ffffff;
+  font-family: roboto;
+  background-size: cover;
+  background-image: url('https://res.cloudinary.com/dusiydn2q/image/upload/v1667290238/Tasty%20Kitchen/restaurantBg_fkujsd.png');
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 16px;
+}
+.rest-img {
+  height: 220px;
+  margin: 30px;
+  margin-left: 50px;
+  margin-bottom: 50px;
+  border-radius: 8px;
+}
+.rest-des-data {
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.rest-des-ratings {
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.rest-dec-heading {
+  font-size: 32px;
+}
+.rest-dec-para {
+  font-size: 16px;
+  font-weight: 400px;
+}
+
+.rest-rating {
+  font-family: DM Sans;
+  font-weight: bold;
+}
+.rest-rating-sub {
+  font-family: DM Sans;
+  color: #e2e8f0;
+  font-size: 12px;
+}

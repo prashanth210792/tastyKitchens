@@ -1,13 +1,19 @@
 import './index.css'
 import {FaStar} from 'react-icons/fa'
+import {withRouter} from 'react-router-dom'
 
 const RestaurantItem = props => {
   const {details} = props
-  const {name, imageUrl, cuisine, userRating} = details
+  const {id, name, imageUrl, cuisine, userRating} = details
   const {rating, totalReviews} = userRating
   console.log(imageUrl)
+
+  const selectRestaurant = () => {
+    const {history} = props
+    history.push(`restaurant/${id}`)
+  }
   return (
-    <li className="restaurant-li">
+    <li className="restaurant-li" onClick={selectRestaurant}>
       <img src={imageUrl} alt="restaurant" className="restaurant-image" />
       <div className="restaurant-item-details">
         <h1 className="restaurant-item-heading">{name}</h1>
@@ -24,4 +30,4 @@ const RestaurantItem = props => {
     </li>
   )
 }
-export default RestaurantItem
+export default withRouter(RestaurantItem)

@@ -7,10 +7,11 @@ import RestaurantItem from '../RestaurantItem'
 
 class RestaurantList extends Component {
   state = {
-    offset: 0,
-    limit: 9,
+    // offset: 0,
+    // limit: 9,
+    activePageNo: 1,
     restaurantList: [],
-    totalRestaurants: 0,
+    // totalRestaurants: 0,
     isLoading: true,
   }
 
@@ -26,7 +27,10 @@ class RestaurantList extends Component {
   })
 
   fetchApiRestaurantList = async () => {
-    const {offset, limit} = this.state
+    this.setState({isLoading: true})
+    const {activePageNo} = this.state
+    const limit = 9
+    const offset = (activePageNo - 1) * limit
     const jwtToken = Cookies.get('jwt_token')
 
     const url = `https://apis.ccbp.in/restaurants-list?offset=${offset}&limit=${limit}`
@@ -38,8 +42,8 @@ class RestaurantList extends Component {
     }
     const response = await fetch(url, options)
     const data = await response.json()
-    console.log(response)
-    console.log(data)
+    // console.log(response)
+    // console.log(data)
     if (response.ok) {
       const camelCasedData = data.restaurants.map(each => ({
         id: each.id,
@@ -48,33 +52,75 @@ class RestaurantList extends Component {
         cuisine: each.cuisine,
         userRating: this.camelCasedUserRating(each.user_rating),
       }))
-      const {total} = data
+      //   const {total} = data
       this.setState({
         restaurantList: camelCasedData,
-        totalRestaurants: total,
+        // totalRestaurants: total,
         isLoading: false,
       })
     }
   }
 
-  Pagination = () => (
-    <div className="pagination-container">
-      <IoIosArrowBack className="arrow" type="button" />
-      <p className="pagination-para">1 of 20</p>
-      <IoIosArrowForward className="arrow" type="button" />
-    </div>
-  )
+  previousList = () => {
+    const {activePageNo} = this.state
+    if (activePageNo > 1) {
+      this.fetchApiRestaurantList()
+      this.setState(prevState => ({activePageNo: prevState.activePageNo - 1}))
+    }
+  }
+
+  nextList = () => {
+    const {activePageNo} = this.state
+    if (activePageNo < 4) {
+      this.fetchApiRestaurantList()
+      this.setState(prevState => ({activePageNo: prevState.activePageNo + 1}))
+    }
+  }
+
+  Pagination = () => {
+    const {activePageNo} = this.state
+    return (
+      <div className="pagination-container">
+        {/* <div testid="pagination-left-button"> */}
+        <div>
+          <IoIosArrowBack
+            className="arrow"
+            type="button"
+            onClick={this.previousList}
+          />
+        </div>
+        <p className="pagination-para">
+          {/* <span testid="active-page-number">{activePageNo}</span> of 4 */}
+          <span>{activePageNo}</span> of 4
+        </p>
+
+        {/* <div testid="pagination-right-button"> */}
+        <div>
+          <IoIosArrowForward
+            className="arrow"
+            type="button"
+            onClick={this.nextList}
+          />
+        </div>
+      </div>
+    )
+  }
+
+  //   sortBy=()=>
 
   restaurantListView = () => {
     const {restaurantList} = this.state
     // console.log(restaurantList)
     return (
       <div className="restaurant-container">
-        <h1 className="restaurant-heading">Popular Restaurants</h1>
-        <p className="restaurant-para">
-          Select Your favourite restaurant special dish and make your day
-          happy...
-        </p>
+        <div>
+          <h1 className="restaurant-heading">Popular Restaurants</h1>
+          <p className="restaurant-para">
+            Select Your favourite restaurant special dish and make your day
+            happy...
+          </p>
+        </div>
+        {/* <div>{this.sortBy()}</div> */}
         <hr />
         <ul className="restaurant-ul">
           {restaurantList.map(each => (
