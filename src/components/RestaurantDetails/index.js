@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import {Component} from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
-import RestaurantDetailsView from '../restaurantDetailsView'
+import RestaurantDetailsView from '../RestaurantDetailsView'
 
 class RestaurantDetails extends Component {
   state = {

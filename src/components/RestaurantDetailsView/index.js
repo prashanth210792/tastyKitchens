@@ -1,8 +1,13 @@
 import './index.css'
 import {Component} from 'react'
 import {FaStar} from 'react-icons/fa'
+import FoodItems from '../FoodItems'
 
 class RestaurantDetailsView extends Component {
+  // state={
+  //     isLoading:true
+  // }
+
   restaurantDescription = () => {
     const {details} = this.props
     console.log(details)
@@ -45,8 +50,19 @@ class RestaurantDetailsView extends Component {
   }
 
   render() {
+    //   const {isLoading}
+    const {details} = this.props
+    const {foodItems} = details
+
     return (
-      <div className="restaurant-container">{this.restaurantDescription()}</div>
+      <div>
+        {this.restaurantDescription()}
+        <ul className="rest-ul-container">
+          {foodItems.map(each => (
+            <FoodItems foodItem={each} key={each.id} />
+          ))}
+        </ul>
+      </div>
     )
   }
 }

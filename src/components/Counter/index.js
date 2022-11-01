@@ -5,12 +5,20 @@ import './index.css'
 class Counter extends Component {
   render() {
     return (
-      <div>
-        <button type="button" onClick={this.onDecrement}>
+      <div className="counter-container">
+        <button
+          type="button"
+          className="counter-btn"
+          onClick={this.onDecrement}
+        >
           -
         </button>
         <div>0</div>
-        <button type="button" onClick={this.onIncrement}>
+        <button
+          type="button"
+          className="counter-btn"
+          onClick={this.onIncrement}
+        >
           +
         </button>
       </div>
