@@ -3,6 +3,7 @@ import {Switch, Route} from 'react-router-dom'
 import Login from './components/Login'
 import Home from './components/Home'
 import RestaurantDetails from './components/RestaurantDetails'
+import Cart from './components/Cart'
 
 // const sortByOptions = [
 //   {
@@ -22,6 +23,7 @@ const App = () => (
     <Route exact path="/" component={Home} />)
     <Route exact path="/login" component={Login} />
     <Route extat path="/restaurant/:id" component={RestaurantDetails} />
+    <Route extat path="/cart" component={Cart} />
   </Switch>
 )
 
