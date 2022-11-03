@@ -61,12 +61,17 @@ class FoodItems extends Component {
         <img src={imageUrl} alt="foodItem" className="food-item-img" />
         <div className="food-item-desc">
           <h1 className="food-item-h1">{name}</h1>
+          {/* <p className="food-item-cost" testid="active-count"> */}
           <p className="food-item-cost">$ {cost}</p>
           {/* <p>{}</p> */}
           {checkId[0] === undefined ? (
             this.addBtn()
           ) : (
-            <Counter id={id} renderState={this.renderState} />
+            <Counter
+              id={id}
+              renderState={this.renderState}
+              testIds={['decrement-count', 'increment-count', 'active-count']}
+            />
           )}
         </div>
       </li>

@@ -45,8 +45,7 @@
   cursor: pointer;
 }
 .cart-btn {
-  height: 32px;
-  width: 100px;
+  padding: 10px;
   color: #ffffff;
   background-color: #f7931e;
   border-style: solid;
@@ -55,4 +54,36 @@
   font-family: DM Sans;
   font-size: 12px;
   font-weight: 500;
+  cursor: pointer;
+}
+.cart-payment-para {
+  font-family: DM Sans;
+  font-size: 24px;
+  font-weight: 500;
+  color: #1e293b;
+}
+.cart-payment-para2 {
+  font-family: DM Sans;
+  font-size: 16px;
+  font-weight: 400;
+  color: #64748b;
+  text-align: center;
+}
+.cart-orderPlaced-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+.empty-cart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.empty-cart-image {
+  height: 300px;
 }

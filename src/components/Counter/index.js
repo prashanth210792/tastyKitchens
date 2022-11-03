@@ -58,7 +58,9 @@ class Counter extends Component {
 
   render() {
     const {localData} = this.state
-    const {id} = this.props
+    const {id, testIds} = this.props
+    // console.log(testIds[0])
+    // console.log(testIds[1])
 
     // const cartData = JSON.parse(localStorage.getItem('cartData'))
     const checkId = localData.filter(each => each.id === id)
@@ -71,17 +73,17 @@ class Counter extends Component {
           type="button"
           className="counter-btn"
           onClick={this.onDecrement}
-          //   testid="decrement-count"
+          //   testid={testIds[0]}
         >
           -
         </button>
-        {/* <div testid="active-count">{localCount}</div> */}
+        {/* <div testid={testIds[2]}>{localCount}</div> */}
         <div>{localCount}</div>
         <button
           type="button"
           className="counter-btn"
           onClick={this.onIncrement}
-          //   testid="increment-count"
+          //   testid={testIds[1]}
         >
           +
         </button>
