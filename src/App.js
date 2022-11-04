@@ -20,14 +20,16 @@ import PageNotFound from './components/PageNotFound'
 // ]
 
 const App = () => (
-  <Switch>
-    <Route exact path="/" component={Home} />)
-    <Route exact path="/login" component={Login} />
-    <Route exact path="/restaurant/:id" component={RestaurantDetails} />
-    <Route exact path="/cart" component={Cart} />
-    <Route exact path="/PageNotFound" component={PageNotFound} />
-    <Redirect to="/PageNotFound" />
-  </Switch>
+  <>
+    <Switch>
+      <Route exact path="/" component={Home} />)
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/restaurant/:id" component={RestaurantDetails} />
+      <Route exact path="/cart" component={Cart} />
+      <Route exact path="/PageNotFound" component={PageNotFound} />
+      <Redirect to="/PageNotFound" />
+    </Switch>
+  </>
 )
 
 export default App

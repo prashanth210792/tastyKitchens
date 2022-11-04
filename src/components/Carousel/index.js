@@ -36,8 +36,8 @@ class Carousel extends Component {
   }
 
   loader = () => (
-    // <div testid="restaurants-offers-loader" className="loader">
-    <div className="loader">
+    <div testid="restaurants-offers-loader" className="loader">
+      {/* <div className="loader"> */}
       <Loader type="TailSpin" color="#F7931E" height={50} width={50} />
     </div>
   )
@@ -55,9 +55,9 @@ class Carousel extends Component {
       <div className="carousel-container">
         <Slider {...settings}>
           {carouselImagesList.map(each => (
-            <div key={each.id}>
+            <li key={each.id}>
               <img src={each.imageUrl} alt="offer" className="carousel-image" />
-            </div>
+            </li>
           ))}
         </Slider>
       </div>

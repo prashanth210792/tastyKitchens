@@ -1,5 +1,6 @@
 import './index.css'
-// import {Redirect} from 'react-router-dom'
+import Cookies from 'js-cookie'
+import {Link, Redirect} from 'react-router-dom'
 import {Component} from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
@@ -30,9 +31,9 @@ class Cart extends Component {
     <div className="cart-container">
       <ul className="cart-ul">
         <li className="cart-li-header">
-          <p>Item</p>
-          <p>Quantity</p>
-          <p>Price</p>
+          <p className="cart-para">Item</p>
+          <p className="cart-para">Quantity</p>
+          <p className="cart-para">Price</p>
         </li>
         {cartData.map(each => (
           <CartItem
@@ -45,9 +46,9 @@ class Cart extends Component {
       <hr />
 
       <div className="cart-total-order">
-        <p>Order Total:</p>
-        {/* <p testid="total-price"> $ {totalPrice}</p> */}
-        <p> $ {totalPrice}</p>
+        <h1>Order Total:</h1>
+        <p testid="total-price"> ₹ {totalPrice}</p>
+        {/* <p> ₹ {totalPrice}</p> */}
       </div>
       <div className="cart-btn-container">
         <button className="cart-btn" type="button" onClick={this.orderPlaced}>
@@ -65,13 +66,16 @@ class Cart extends Component {
         alt="empty cart"
         className="empty-cart-image"
       />
-      <p className="cart-payment-para">No Orders Yet!</p>
+      <h1 className="cart-payment-para">No Order Yet!</h1>
       <p className="cart-payment-para2">
         Your cart is empty. Add something from the menu.
       </p>
-      <button className="cart-btn" type="button" onClick={this.goHomePage}>
-        Order Now
-      </button>
+      {/* <button className="cart-btn" type="button" onClick={this.goHomePage}> */}
+      <Link to="/">
+        <button className="cart-btn" type="button">
+          Order Now
+        </button>
+      </Link>
     </div>
   )
 
@@ -93,20 +97,28 @@ class Cart extends Component {
         src="https://res.cloudinary.com/dusiydn2q/image/upload/v1667394526/Tasty%20Kitchen/VectortickLogo_pmnru2.png"
         alt="logo"
       />
-      <p className="cart-payment-para">Payment Successful</p>
+      <h1 className="cart-payment-para">Payment Successful</h1>
       <p className="cart-payment-para2">
-        Thank you for ordering
+        Thank you for ordering Your payment is successfully completed.
+        {/* Thank you for ordering
         <br />
-        Your payment is successfully completed.
+        Your payment is successfully completed. */}
       </p>
-      <button className="cart-btn" type="button" onClick={this.goHomePage}>
-        Go To Home Page
-      </button>
+      {/* <button className="cart-btn" type="button" onClick={this.goHomePage}> */}
+      <Link to="/">
+        <button className="cart-btn" type="button" onClick={this.goHomePage}>
+          Go To Home Page
+        </button>
+      </Link>
     </div>
   )
 
   render() {
     const {isOrderPlaced} = this.state
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken === undefined) {
+      return <Redirect to="/login" />
+    }
 
     return (
       <>

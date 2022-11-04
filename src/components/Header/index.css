@@ -35,6 +35,7 @@
   font-family: Inter;
 }
 .header-names-container {
+  list-style-type: none;
   width: 240px;
   display: flex;
   flex-direction: row;

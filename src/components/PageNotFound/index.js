@@ -1,9 +1,10 @@
 import './index.css'
+import {Link} from 'react-router-dom'
 
-const goHomePage = () => {
-  const {history} = this.props
-  history.push('/')
-}
+// const goHomePage = () => {
+//   const {history} = this.props
+//   history.push('/')
+// }
 
 const PageNotFound = () => (
   <div className="cart-orderPlaced-container">
@@ -12,15 +13,18 @@ const PageNotFound = () => (
       alt="not found"
       className="empty-cart-image"
     />
-    <p className="cart-payment-para">Page Not Found</p>
+    <h1 className="cart-payment-para">Page Not Found</h1>
     <p className="cart-payment-para2">
       We are sorry, the page you requested could not be found.
       <br />
       Please go back to the homepage
     </p>
-    <button className="cart-btn" type="button" onClick={goHomePage}>
-      Order Now
-    </button>
+    <Link to="/">
+      {/* <button className="cart-btn" type="button" onClick={goHomePage}> */}
+      <button className="cart-btn" type="button">
+        Home Page
+      </button>
+    </Link>
   </div>
 )
 export default PageNotFound

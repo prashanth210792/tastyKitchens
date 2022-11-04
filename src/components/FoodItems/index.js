@@ -3,7 +3,6 @@ import {Component} from 'react'
 import Counter from '../Counter'
 
 class FoodItems extends Component {
-  //   localStorage.setItem('cartData', JSON.stringify([]))
   state = {
     localData: [],
   }
@@ -38,7 +37,7 @@ class FoodItems extends Component {
 
   addBtn = () => (
     <button type="button" className="food-item-btn" onClick={this.addItem}>
-      ADD
+      Add
     </button>
   )
 
@@ -56,13 +55,15 @@ class FoodItems extends Component {
     const checkId = localData.filter(each => each.id === id)
 
     return (
-      // <li className="food-item-li" testid="foodItem">
-      <li className="food-item-li">
+      <li className="food-item-li" testid="foodItem">
+        {/* <li className="food-item-li"> */}
         <img src={imageUrl} alt="foodItem" className="food-item-img" />
         <div className="food-item-desc">
           <h1 className="food-item-h1">{name}</h1>
-          {/* <p className="food-item-cost" testid="active-count"> */}
-          <p className="food-item-cost">$ {cost}</p>
+          <p className="food-item-cost" testid="active-count">
+            ₹ {cost}
+          </p>
+          {/* <p className="food-item-cost">₹ {cost}</p> */}
           {/* <p>{}</p> */}
           {checkId[0] === undefined ? (
             this.addBtn()

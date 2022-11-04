@@ -5,6 +5,19 @@ import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
 import Loader from 'react-loader-spinner'
 import RestaurantItem from '../RestaurantItem'
 
+const sortByOptions = [
+  {
+    id: 0,
+    displayText: 'Highest',
+    value: 'Highest',
+  },
+  {
+    id: 2,
+    displayText: 'Lowest',
+    value: 'Lowest',
+  },
+]
+
 class RestaurantList extends Component {
   state = {
     // offset: 0,
@@ -13,6 +26,9 @@ class RestaurantList extends Component {
     restaurantList: [],
     // totalRestaurants: 0,
     isLoading: true,
+    selectedSortByValue: sortByOptions[1].value,
+    sortBySelectedId: 2,
+    searchInput: '',
   }
 
   componentDidMount() {
@@ -28,12 +44,14 @@ class RestaurantList extends Component {
 
   fetchApiRestaurantList = async () => {
     this.setState({isLoading: true})
-    const {activePageNo} = this.state
+    const {activePageNo, selectedSortByValue, searchInput} = this.state
     const limit = 9
     const offset = (activePageNo - 1) * limit
     const jwtToken = Cookies.get('jwt_token')
 
-    const url = `https://apis.ccbp.in/restaurants-list?offset=${offset}&limit=${limit}`
+    // const url = `https://apis.ccbp.in/restaurants-list?offset=${offset}&limit=${limit}`
+    const url = `https://apis.ccbp.in/restaurants-list?search=${searchInput}&offset=${offset}limit=${limit}&sort_by_rating=${selectedSortByValue}`
+    // console.log(url)
     const options = {
       method: 'GET',
       headers: {
@@ -81,8 +99,8 @@ class RestaurantList extends Component {
     const {activePageNo} = this.state
     return (
       <div className="pagination-container">
-        {/* <div testid="pagination-left-button"> */}
-        <div>
+        <div testid="pagination-left-button">
+          {/* <div> */}
           <IoIosArrowBack
             className="arrow"
             type="button"
@@ -90,12 +108,12 @@ class RestaurantList extends Component {
           />
         </div>
         <p className="pagination-para">
-          {/* <span testid="active-page-number">{activePageNo}</span> of 4 */}
-          <span>{activePageNo}</span> of 4
+          <span testid="active-page-number">{activePageNo}</span> of 4
+          {/* <span>{activePageNo}</span> of 4 */}
         </p>
 
-        {/* <div testid="pagination-right-button"> */}
-        <div>
+        <div testid="pagination-right-button">
+          {/* <div> */}
           <IoIosArrowForward
             className="arrow"
             type="button"
@@ -106,21 +124,56 @@ class RestaurantList extends Component {
     )
   }
 
-  //   sortBy=()=>
+  selectSortBy = event => {
+    // console.log(event.target.value)
+    const filterId = sortByOptions.filter(
+      each => each.value === event.target.value,
+    )
+
+    this.setState(
+      {
+        selectedSortByValue: event.target.value,
+        sortBySelectedId: filterId[0].id,
+      },
+      this.fetchApiRestaurantList,
+    )
+  }
+
+  sortByView = () => {
+    const {sortBySelectedId} = this.state
+    return (
+      <select className="restaurant-sortBy" onChange={this.selectSortBy}>
+        {sortByOptions.map(each =>
+          sortBySelectedId === each.id ? (
+            <option id={each.id} selected value={each.value} key={each.id}>
+              {each.displayText}
+            </option>
+          ) : (
+            <option id={each.id} value={each.value} key={each.id}>
+              {each.displayText}
+            </option>
+          ),
+        )}
+      </select>
+    )
+  }
 
   restaurantListView = () => {
     const {restaurantList} = this.state
     // console.log(restaurantList)
     return (
       <div className="restaurant-container">
-        <div>
-          <h1 className="restaurant-heading">Popular Restaurants</h1>
-          <p className="restaurant-para">
-            Select Your favourite restaurant special dish and make your day
-            happy...
-          </p>
+        <div className="restaurant-heading-main">
+          <div>
+            <h1 className="restaurant-heading">Popular Restaurants</h1>
+            <p className="restaurant-para">
+              Select Your favourite restaurant special dish and make your day
+              happy...
+            </p>
+          </div>
+
+          {this.sortByView()}
         </div>
-        {/* <div>{this.sortBy()}</div> */}
         <hr />
         <ul className="restaurant-ul">
           {restaurantList.map(each => (
@@ -133,8 +186,8 @@ class RestaurantList extends Component {
   }
 
   loader = () => (
-    // <div testid="restaurants-list-loader" className="loader">
-    <div className="loader">
+    <div testid="restaurants-list-loader" className="loader">
+      {/* <div className="loader"> */}
       <Loader type="TailSpin" color="#F7931E" height={50} width={50} />
     </div>
   )

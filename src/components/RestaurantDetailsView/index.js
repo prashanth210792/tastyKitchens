@@ -4,13 +4,9 @@ import {FaStar} from 'react-icons/fa'
 import FoodItems from '../FoodItems'
 
 class RestaurantDetailsView extends Component {
-  // state={
-  //     isLoading:true
-  // }
-
   restaurantDescription = () => {
     const {details} = this.props
-    console.log(details)
+    // console.log(details)
     const {
       rating,
       id,
@@ -40,7 +36,7 @@ class RestaurantDetailsView extends Component {
             </div>
 
             <div>
-              <p className="rest-rating">$ {costForTwo}</p>
+              <p className="rest-rating">₹ {costForTwo}</p>
               <p className="rest-rating-sub">cost for two</p>
             </div>
           </div>
@@ -50,7 +46,6 @@ class RestaurantDetailsView extends Component {
   }
 
   render() {
-    //   const {isLoading}
     const {details} = this.props
     const {foodItems} = details
 

@@ -1,6 +1,7 @@
 import './index.css'
 import Cookies from 'js-cookie'
 import {Component} from 'react'
+import {Redirect} from 'react-router-dom'
 
 class Login extends Component {
   state = {
@@ -26,7 +27,7 @@ class Login extends Component {
     const data = await response.json()
     console.log(response)
     console.log(data)
-    if (response.ok) {
+    if (response.ok === true) {
       const token = data.jwt_token
       Cookies.set('jwt_token', token, {expires: 1})
 
@@ -49,6 +50,10 @@ class Login extends Component {
 
   render() {
     const {username, password, errorMessage} = this.state
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken !== undefined) {
+      return <Redirect to="/" />
+    }
     return (
       <div className="login-bg">
         <div className="login-form-bg">
@@ -76,14 +81,14 @@ class Login extends Component {
               onChange={this.onChangeUserName}
             />
             <br />
-            <label className="login-form-label-name" htmlFor="username">
+            <label className="login-form-label-name" htmlFor="password">
               PASSWORD
             </label>
             <br />
             <input
               className="login-form-input"
-              id="PASSWORD"
-              type="text"
+              id="password"
+              type="password"
               value={password}
               onChange={this.onChangePassword}
             />

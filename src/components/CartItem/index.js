@@ -13,11 +13,11 @@ class CartItem extends Component {
     }
 
     return (
-      //   <li className="cartItem-li" testid="cartItem">
-      <li className="cartItem-li">
+      <li className="cartItem-li" testid="cartItem">
+        {/* <li className="cartItem-li"> */}
         <div className="cartItem-img-container">
           <img src={imageUrl} alt="cartItem" className="cartItem-img" />
-          <p className="cartItem-name">{name}</p>
+          <h1 className="cartItem-name">{name}</h1>
         </div>
         <div className="cartItem-counter">
           <Counter

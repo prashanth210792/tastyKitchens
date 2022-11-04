@@ -6,7 +6,7 @@ const RestaurantItem = props => {
   const {details} = props
   const {id, name, imageUrl, cuisine, userRating} = details
   const {rating, totalReviews} = userRating
-  console.log(imageUrl)
+  //   console.log(imageUrl)
 
   const selectRestaurant = () => {
     const {history} = props

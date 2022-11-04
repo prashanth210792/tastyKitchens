@@ -1,6 +1,7 @@
 import './index.css'
 import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
+import {Redirect} from 'react-router-dom'
 import {Component} from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
@@ -28,11 +29,19 @@ class RestaurantDetails extends Component {
   }
 
   fetchApiRestaurantDetails = async () => {
+    const jwtToken = Cookies.get('jwt_token')
+    // if (jwtToken === undefined) {
+    //   return <Redirect to="/login" />
+    // }
+
     // console.log(this.props)
-    const {match} = this.props
+    const {match, history} = this.props
     const {params} = match
     const {id} = params
-    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken === undefined) {
+      history.replace('/login')
+    }
+    // const jwtToken = Cookies.get('jwt_token')
     const apiUrl = `https://apis.ccbp.in/restaurants-list/${id}`
     const options = {
       method: 'GET',
@@ -58,14 +67,14 @@ class RestaurantDetails extends Component {
         itemsCount: data.items_count,
         foodItems: this.camelCaseFoodItem(data.food_items),
       }
-      console.log(restDetails)
+      //   console.log(restDetails)
       this.setState({fetchedRestaurantDetails: restDetails, isLoading: false})
     }
   }
 
   loader = () => (
-    //   <div testid="restaurant-details-loader" className="loader">
-    <div className="loader">
+    <div testid="restaurant-details-loader" className="loader">
+      {/* <div className="loader"> */}
       <Loader type="TailSpin" color="#F7931E" height={50} width={50} />
     </div>
   )

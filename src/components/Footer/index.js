@@ -1,12 +1,10 @@
-import {Component} from 'react'
+import './index.css'
 import {
   FaPinterestSquare,
   FaInstagram,
   FaTwitter,
   FaFacebookSquare,
 } from 'react-icons/fa'
-
-import './index.css'
 
 export default function Footer() {
   return (
@@ -22,14 +20,28 @@ export default function Footer() {
         The only thing we are serious about is food. Contact us on
       </p>
       <div className="footer-logs-container">
-        <FaPinterestSquare />
+        {/* <FaPinterestSquare />
         <FaInstagram />
         <FaTwitter />
-        <FaFacebookSquare />
+        <FaFacebookSquare /> */}
+
         {/* <FaPinterestSquare testid="pintrest-social-icon" />
         <FaInstagram testid="instagram-social-icon" />
         <FaTwitter testid="twitter-social-icon" />
         <FaFacebookSquare testid="facebook-social-icon" /> */}
+
+        <div testid="pintrest-social-icon">
+          <FaPinterestSquare />
+        </div>
+        <div testid="instagram-social-icon">
+          <FaInstagram />
+        </div>
+        <div testid="twitter-social-icon">
+          <FaTwitter />
+        </div>
+        <div testid="facebook-social-icon">
+          <FaFacebookSquare />
+        </div>
       </div>
     </div>
   )
